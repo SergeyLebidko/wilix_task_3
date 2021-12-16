@@ -1,9 +1,14 @@
+import {RateRecord} from "./types";
+
 export enum AppMode {
     Converter,
     RateList
 }
 
-export const currencyCodeMap = {
+const API_KEY = 'c18a367ce7fd6ba424902c7b56169f57';
+export const RATES_URL = `http://api.exchangeratesapi.io/v1/latest?access_key=${API_KEY}`;
+
+export const CURRENCY_CODE_MAP: RateRecord = {
     "AED": "Дирхам ОАЭ",
     "AFN": "Афганский афгани",
     "ALL": "Албанский лек",
