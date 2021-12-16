@@ -30,14 +30,10 @@ const App: React.FC = () => {
         <div>
             <ModeController mode={mode} setConverterMode={setConverterMode} setRateListMode={setRateListMode}/>
             {mode === AppMode.Converter &&
-            <Converter/>
+            <Converter ratesData={ratesData}/>
             }
             {mode === AppMode.RateList &&
-            <RateList
-                ratesData={ratesData}
-                defaultBase={defaultBase}
-                setDefaultBase={setDefaultBase}
-            />
+            <RateList ratesData={ratesData} defaultBase={defaultBase} setDefaultBase={setDefaultBase}/>
             }
         </div>
     );
