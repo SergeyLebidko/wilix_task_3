@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import ModeController from '../ModeController/ModeController';
 import Converter from '../Converter/Converter';
 import RateList from '../RateList/RateList';
-import Preloader from "../Preloader/Preloader";
-import {AppMode} from '../../settings';
-import {loadRates} from "../../utils";
-import {RatesData} from "../../types";
+import Preloader from '../Preloader/Preloader';
+import {AppMode, DEFAULT_BASE} from '../../settings';
+import {loadRates} from '../../utils';
+import {RatesData} from '../../types';
 import './App.scss';
 
 const App: React.FC = () => {
@@ -14,9 +14,7 @@ const App: React.FC = () => {
     const setRateListMode = () => setMode(AppMode.RateList);
 
     const [ratesData, setRatesData] = useState<RatesData | null>(null);
-    const [defaultBase, setDefaultBase] = useState<string | null>(null);
-
-    const isString = (object: string | null): object is string => typeof object === 'string';
+    const [defaultBase, setDefaultBase] = useState<string>(DEFAULT_BASE);
 
     // Загружаем и сохраняем данные от api при запуске приложения
     useEffect(() => {
@@ -31,8 +29,10 @@ const App: React.FC = () => {
     return (
         <div>
             <ModeController mode={mode} setConverterMode={setConverterMode} setRateListMode={setRateListMode}/>
-            {mode === AppMode.Converter && <Converter/>}
-            {mode === AppMode.RateList && isString(defaultBase) &&
+            {mode === AppMode.Converter &&
+            <Converter/>
+            }
+            {mode === AppMode.RateList &&
             <RateList
                 ratesData={ratesData}
                 defaultBase={defaultBase}
