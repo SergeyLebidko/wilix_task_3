@@ -14,7 +14,11 @@ const RateList: React.FC<RateListProps> = ({ratesData, defaultBase, setDefaultBa
     const rates: RateRecord = ratesData.rates;
     const rateCodes: Array<string> = Object.keys(rates);
 
-    const getRate = (code: string): number => rates[code];
+    const getRate = (code: string): number => {
+        if (defaultBase === code) return 1;
+        if (defaultBase === base) return 1 / rates[code];
+        return 1 / (rates[code] * (1 / rates[defaultBase]));
+    };
 
     const changeBaseHandler = (event: ChangeEvent<HTMLSelectElement>): void => setDefaultBase(event.target.value);
 
