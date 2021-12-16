@@ -14,19 +14,31 @@ const App: React.FC = () => {
     const setRateListMode = () => setMode(AppMode.RateList);
 
     const [ratesData, setRatesData] = useState<RatesData | null>(null);
+    const [defaultBase, setDefaultBase] = useState<string | null>(null);
+
+    const isString = (object: string | null): object is string => typeof object === 'string';
 
     // Загружаем и сохраняем данные от api при запуске приложения
     useEffect(() => {
-        loadRates().then((ratesData: RatesData): void => setRatesData(ratesData));
+        loadRates().then((ratesData: RatesData): void => {
+            setRatesData(ratesData);
+            setDefaultBase(ratesData.base);
+        });
     }, []);
 
-    if(!ratesData) return <Preloader/>
+    if (!ratesData) return <Preloader/>
 
     return (
         <div>
             <ModeController mode={mode} setConverterMode={setConverterMode} setRateListMode={setRateListMode}/>
             {mode === AppMode.Converter && <Converter/>}
-            {mode === AppMode.RateList && <RateList ratesData={ratesData}/>}
+            {mode === AppMode.RateList && isString(defaultBase) &&
+            <RateList
+                ratesData={ratesData}
+                defaultBase={defaultBase}
+                setDefaultBase={setDefaultBase}
+            />
+            }
         </div>
     );
 }
