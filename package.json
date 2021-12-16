@@ -1,7 +1,7 @@
 {
   "name": "wilix_task_3",
   "version": "0.1.0",
-  "homepage": "https://hproger.ru/wilix_task_3/",
+  "homepage": "http://hproger.ru/wilix_task_3/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
