@@ -36,12 +36,14 @@ const App: React.FC = () => {
     return (
         <div className="app">
             <ModeController mode={mode} setConverterMode={setConverterMode} setRateListMode={setRateListMode}/>
-            {mode === AppMode.Converter &&
-            <Converter ratesData={ratesData}/>
-            }
-            {mode === AppMode.RateList &&
-            <RateList ratesData={ratesData} defaultBase={defaultBase} setDefaultBase={setDefaultBase}/>
-            }
+            <div className="app__content">
+                {mode === AppMode.Converter &&
+                <Converter ratesData={ratesData}/>
+                }
+                {mode === AppMode.RateList &&
+                <RateList ratesData={ratesData} defaultBase={defaultBase} setDefaultBase={setDefaultBase}/>
+                }
+            </div>
         </div>
     );
 }

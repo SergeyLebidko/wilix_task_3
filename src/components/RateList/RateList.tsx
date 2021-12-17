@@ -2,6 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {RateRecord, RatesData} from '../../types';
 import {CURRENCY_CODE_MAP} from '../../settings';
 import './RateList.scss';
+import RateCards from "../RateCards/RateCards";
 
 type RateListProps = {
     ratesData: RatesData,
@@ -14,7 +15,7 @@ const RateList: React.FC<RateListProps> = ({ratesData, defaultBase, setDefaultBa
     const rates: RateRecord = ratesData.rates;
     const rateCodes: Array<string> = Object.keys(rates);
 
-    const getRate = (code: string): number => {
+    const getRateValue = (code: string): number => {
         if (defaultBase === code) return 1;
         if (defaultBase === base) return 1 / rates[code];
         return 1 / (rates[code] * (1 / rates[defaultBase]));
@@ -24,17 +25,15 @@ const RateList: React.FC<RateListProps> = ({ratesData, defaultBase, setDefaultBa
 
     return (
         <div className="rate_list">
-            <h1>
-                Базовая валюта
-                <select value={defaultBase} onChange={changeBaseHandler}>
+            <div className="rate_list__choice_block">
+                <label htmlFor="default_base_selector">Базовая валюта:</label>
+                <select id="default_base_selector" value={defaultBase} onChange={changeBaseHandler}>
                     {rateCodes.map(
                         (code: string) => <option key={code} value={code}>{code} {CURRENCY_CODE_MAP[code]}</option>
                     )}
                 </select>
-            </h1>
-            <ul>
-                {rateCodes.map((code: string) => <li key={code}>{code} {CURRENCY_CODE_MAP[code]} {getRate(code)}</li>)}
-            </ul>
+            </div>
+            <RateCards rateCodes={rateCodes} getRateValue={getRateValue}/>
         </div>
     );
 }
