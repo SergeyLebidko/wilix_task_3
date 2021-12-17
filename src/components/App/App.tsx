@@ -34,7 +34,7 @@ const App: React.FC = () => {
     if (!ratesData) return <Preloader/>;
 
     return (
-        <div>
+        <div className="app">
             <ModeController mode={mode} setConverterMode={setConverterMode} setRateListMode={setRateListMode}/>
             {mode === AppMode.Converter &&
             <Converter ratesData={ratesData}/>
