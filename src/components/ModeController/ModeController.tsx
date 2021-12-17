@@ -11,8 +11,6 @@ type ModeControllerProps = {
 const ModeController: React.FC<ModeControllerProps> = ({mode, setConverterMode, setRateListMode}) => {
     const getButtonClasses = (buttonMode: AppMode): string => {
         let result = 'mode_controller__button';
-        if (buttonMode == AppMode.Converter) result += ' mode_controller_left_button';
-        if (buttonMode == AppMode.RateList) result += ' mode_controller_right_button';
         if (buttonMode == mode) result += ' mode_controller_active_button';
         return result;
     }
