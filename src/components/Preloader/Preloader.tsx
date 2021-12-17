@@ -4,7 +4,8 @@ import './Preloader.scss';
 const Preloader: React.FC = () => {
     return (
         <div className="preloader">
-            Загрузка необходимых данных...
+            <div className="preloader__pulsar"/>
+            <span className="preloader__title">Загрузка</span>
         </div>
     );
 }
