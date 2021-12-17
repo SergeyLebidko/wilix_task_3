@@ -3,7 +3,7 @@ import ModeController from '../ModeController/ModeController';
 import Converter from '../Converter/Converter';
 import RateList from '../RateList/RateList';
 import Preloader from '../Preloader/Preloader';
-import Error from "../Error/Error";
+import Error from '../Error/Error';
 import {AppMode, DEFAULT_BASE} from '../../settings';
 import {loadRates} from '../../utils';
 import {RatesData} from '../../types';
@@ -26,9 +26,7 @@ const App: React.FC = () => {
                 setRatesData(ratesData);
                 setDefaultBase(ratesData.base);
             })
-            .catch((err: Error): void => {
-                setError(`Не удалось загрузить/обновить данные о курсах валют. Возникла ошибка: ${err.message}`);
-            });
+            .catch((err: Error): void => setError(err.message));
     }, []);
 
     if (error) return <Error error={error}/>;

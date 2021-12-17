@@ -1,3 +1,6 @@
+/* Загрузка необходимых шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 /* Сброс стилей браузера */
 html, body, main, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
@@ -9,6 +12,8 @@ time, mark, audio, video, button {
   font-size: 1rem;
   vertical-align: baseline;
   box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
