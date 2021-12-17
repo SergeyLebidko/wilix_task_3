@@ -9,14 +9,20 @@ type ModeControllerProps = {
 };
 
 const ModeController: React.FC<ModeControllerProps> = ({mode, setConverterMode, setRateListMode}) => {
-    const buttonClasses = (buttonMode: AppMode): string => buttonMode === mode ? 'mode_controller__current_mode' : '';
+    const getButtonClasses = (buttonMode: AppMode): string => {
+        let result = 'mode_controller__button';
+        if (buttonMode == AppMode.Converter) result += ' mode_controller_left_button';
+        if (buttonMode == AppMode.RateList) result += ' mode_controller_right_button';
+        if (buttonMode == mode) result += ' mode_controller_active_button';
+        return result;
+    }
 
     return (
         <div className="mode_controller">
-            <button className={buttonClasses(AppMode.Converter)} onClick={setConverterMode}>
+            <button className={getButtonClasses(AppMode.Converter)} onClick={setConverterMode}>
                 Конвертер
             </button>
-            <button className={buttonClasses(AppMode.RateList)} onClick={setRateListMode}>
+            <button className={getButtonClasses(AppMode.RateList)} onClick={setRateListMode}>
                 Текущие курсы
             </button>
         </div>

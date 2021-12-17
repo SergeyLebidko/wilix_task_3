@@ -1,4 +1,30 @@
+@import "../../styles/presets";
+
 .mode_controller {
+  padding: 2em;
+
+  &__button {
+    width: 15em;
+    padding: 0.5em 3em;
+    background-color: $gray;
+    color: $white;
+    cursor: pointer;
+  }
+
+  &_left_button {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+
+  &_right_button {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  &_active_button {
+    background-color: $blue;
+  }
+
   &__current_mode {
     border: 2px solid orangered;
   }
