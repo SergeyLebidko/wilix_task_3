@@ -105,7 +105,7 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
                 Введите запрос на конвертирование в виде: сумма код_исходной_валюты код_целевой_валюты
             </p>
             <p className="converter__help_text">
-                Вы можете выбирать нужные валюты из списка внизу (можно искать по коду или наименованию).
+                Вы можете выбирать нужные валюты из списка внизу (можно искать по коду или названию валюты).
             </p>
             <div className="converter__result_bloсk">
                 {result !== null && <h1 className="converter__result">{result}</h1>}
