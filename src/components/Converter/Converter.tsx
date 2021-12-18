@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import RateCards from '../RateCards/RateCards';
+import ConverterResult, {ConverterResultProps} from '../ConverterResult/ConverterResult';
 import {RateRecord, RatesData} from '../../types';
 import './Converter.scss';
 
@@ -14,7 +15,7 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
     const [error, setError] = useState<string | null>(null);
     const errorTimer: { current: NodeJS.Timeout | undefined } = useRef();
 
-    const [result, setResult] = useState<string | null>(null);
+    const [result, setResult] = useState<ConverterResultProps | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -62,9 +63,7 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
             return;
         }
 
-        const setResultText = (resultCount: number): void => {
-            setResult(`${count} ${baseFrom} = ${resultCount} ${baseTo}`);
-        }
+        const setResultText = (resultCount: number): void => setResult({count, resultCount, baseFrom, baseTo});
 
         if (baseFrom === baseTo) {
             setResultText(count);
@@ -108,7 +107,7 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
                 Вы можете выбирать нужные валюты из списка внизу (можно искать по коду или названию валюты).
             </p>
             <div className="converter__result_bloсk">
-                {result !== null && <h1 className="converter__result">{result}</h1>}
+                {result && <ConverterResult {...result}/>}
             </div>
             <RateCards rateCodes={rateCodes} clickHandler={cardClickHandler}/>
         </div>

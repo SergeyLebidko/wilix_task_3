@@ -1,0 +1,31 @@
+@import "../../styles/presets";
+
+.converter_result {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &__text_value {
+    font-size: 2em;
+    margin-right: 0.5rem;
+  }
+
+  &__currency_block {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.5rem;
+    background-color: $gray-light;
+    border: 1px solid $gray;
+    border-radius: 5px;
+    padding: 4px;
+  }
+
+  &__currency_code {
+    font-family: sans-serif;
+    font-weight: bold;
+  }
+
+  &__currency_name {
+    font-size: 0.8em;
+  }
+}
