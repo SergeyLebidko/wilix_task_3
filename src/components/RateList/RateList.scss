@@ -8,15 +8,15 @@
   &__base_block {
     padding: 0.5em;
     margin-bottom: 1em;
+  }
 
-    h1 {
-      font-size: 1.5em;
-      margin-bottom: 6px;
-    }
+  &__base_pane {
+    font-size: 1.5em;
+    margin-bottom: 6px;
+  }
 
-    p {
-      font-size: 0.9em;
-      color: $gray-dark;
-    }
+  &__help_text {
+    font-size: 0.9em;
+    color: $gray-dark;
   }
 }

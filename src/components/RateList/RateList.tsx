@@ -24,13 +24,13 @@ const RateList: React.FC<RateListProps> = ({ratesData, defaultBase, setDefaultBa
     return (
         <div className="rate_list">
             <div className="rate_list__base_block">
-                <h1>
+                <h1 className="rate_list__base_pane">
                     Базовая валюта: {defaultBase} {CURRENCY_CODE_MAP[defaultBase]}
                 </h1>
-                <p>
+                <p className="rate_list__help_text">
                     Чтобы выбрать другую базовую валюту, просто кликните по её карточке внизу.
                 </p>
-                <p>
+                <p className="rate_list__help_text">
                     Вы можете искать нужную валюту по её коду или названию.
                 </p>
             </div>

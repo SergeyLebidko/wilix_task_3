@@ -30,7 +30,12 @@ const RateCards: React.FC<RateCardsProps> = ({rateCodes, getRateValue, clickHand
     return (
         <div className="rate_cards">
             <div className="rate_cards__filter_block">
-                <input placeholder="Код или название валюты" value={filterValue} onChange={filterChangeHandler}/>
+                <input
+                    className="rate_cards__filter_input"
+                    placeholder="Код или название валюты"
+                    value={filterValue}
+                    onChange={filterChangeHandler}
+                />
             </div>
             <ul className="rate_cards__cards_block">
                 {rateCodesToShow.map(
