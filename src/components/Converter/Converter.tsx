@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
+import RateCards from '../RateCards/RateCards';
 import {RateRecord, RatesData} from '../../types';
 import './Converter.scss';
-import RateCards from "../RateCards/RateCards";
 
 type ConverterProps = {
     ratesData: RatesData
@@ -12,19 +12,27 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
     const rateCodes: Array<string> = Object.keys(rates);
 
     const [error, setError] = useState<string | null>(null);
-    const [result, setResult] = useState<number | null>();
+    const [result, setResult] = useState<string | null>();
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const setResultText = (startCount: number, resultCount: number, baseFrom: string, baseTo: string): void => {
+        setResult(`${startCount} ${baseFrom} = ${resultCount} ${baseTo}`);
+    }
 
     const setErrorText = (text: string): void => {
         setError(text);
         setTimeout(() => setError(null), 4000);
     }
 
+    const inputKeyPressHandler = (event: {key: string}): void => {
+        if(event.key === 'Enter') calcHandler();
+    }
+
     const calcHandler = (): void => {
         if (!inputRef.current) return;
 
         const {base, rates} = ratesData;
-        const [_count, _baseFrom, _baseTo] = inputRef.current.value.split(/\s+/);
+        const [_count, _baseFrom, _baseTo] = inputRef.current.value.trim().split(/\s+/);
         if (!_count || !_baseFrom || !_baseTo) {
             setErrorText('Введите сумму, код исходной валюты и код целевой валюты');
             return;
@@ -49,22 +57,21 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
         }
 
         if (baseFrom === baseTo) {
-            setResult(count);
+            setResultText(count, count, baseFrom, baseTo);
             return;
         }
 
         if (baseTo === base) {
-            console.log('тут', count)
-            setResult(count / rates[baseFrom]);
+            setResultText(count, count / rates[baseFrom], baseFrom, baseTo);
             return;
         }
 
         if (baseFrom === base) {
-            setResult(count * rates[baseTo]);
+            setResultText(count, count * rates[baseTo], baseFrom, baseTo);
             return;
         }
 
-        setResult((count / rates[baseFrom]) * rates[baseTo]);
+        setResultText(count, (count / rates[baseFrom]) * rates[baseTo], baseFrom, baseTo);
     }
 
     const cardClickHandler = (code: string): void => {
@@ -75,7 +82,12 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
     return (
         <div className="converter">
             <div className="converter__request_block">
-                <input className="converter__request_field" ref={inputRef} placeholder="Введите запрос"/>
+                <input
+                    className="converter__request_field"
+                    ref={inputRef}
+                    placeholder="Введите запрос"
+                    onKeyDown={inputKeyPressHandler}
+                />
                 <button className="converter__calc_button" onClick={calcHandler}>Рассчитать</button>
             </div>
             {error && <p className="converter__error_text">{error}</p>}
