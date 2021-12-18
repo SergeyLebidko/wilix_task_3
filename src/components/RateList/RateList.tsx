@@ -1,16 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import RateCards from '../RateCards/RateCards';
 import {RateRecord, RatesData} from '../../types';
-import {CURRENCY_CODE_MAP} from '../../settings';
+import {CURRENCY_CODE_MAP, DEFAULT_BASE} from '../../settings';
 import './RateList.scss';
 
 type RateListProps = {
-    ratesData: RatesData,
-    defaultBase: string,
-    setDefaultBase: (nextBase: string) => void
+    ratesData: RatesData
 }
 
-const RateList: React.FC<RateListProps> = ({ratesData, defaultBase, setDefaultBase}) => {
+const RateList: React.FC<RateListProps> = ({ratesData, }) => {
+    const [defaultBase, setDefaultBase] = useState<string>(DEFAULT_BASE);
+
     const base: string = ratesData.base;
     const rates: RateRecord = ratesData.rates;
     const rateCodes: Array<string> = Object.keys(rates);
