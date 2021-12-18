@@ -12,7 +12,7 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
     const rateCodes: Array<string> = Object.keys(rates);
 
     const [error, setError] = useState<string | null>(null);
-    const [result, setResult] = useState<string | null>();
+    const [result, setResult] = useState<string | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const setErrorText = (text: string): void => {
@@ -85,7 +85,7 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
         <div className="converter">
             <div className="converter__request_block">
                 <input
-                    className="converter__request_field"
+                    className="converter__request_input"
                     ref={inputRef}
                     placeholder="Введите запрос"
                     onKeyDown={inputKeyPressHandler}
@@ -99,7 +99,9 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
             <p className="converter__help_text">
                 Вы можете выбирать нужные валюты из списка внизу (можно искать по коду или наименованию).
             </p>
-            {result !== null && <h1 className="converter__result">{result}</h1>}
+            <div className="converter__result_blok">
+                {result !== null && <h1 className="converter__result">{result}</h1>}
+            </div>
             <RateCards rateCodes={rateCodes} clickHandler={cardClickHandler}/>
         </div>
     );

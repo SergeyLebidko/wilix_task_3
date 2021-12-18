@@ -16,14 +16,14 @@ const ModeController: React.FC<ModeControllerProps> = ({mode, setConverterMode, 
     }
 
     return (
-        <div className="mode_controller">
+        <header className="mode_controller">
             <button className={getButtonClasses(AppMode.Converter)} onClick={setConverterMode}>
                 Конвертер
             </button>
             <button className={getButtonClasses(AppMode.RateList)} onClick={setRateListMode}>
                 Текущие курсы
             </button>
-        </div>
+        </header>
     );
 }
 

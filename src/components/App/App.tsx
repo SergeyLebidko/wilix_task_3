@@ -32,10 +32,10 @@ const App: React.FC = () => {
     return (
         <div className="app">
             <ModeController mode={mode} setConverterMode={setConverterMode} setRateListMode={setRateListMode}/>
-            <div className="app__content">
+            <main className="app__content">
                 {mode === AppMode.Converter && <Converter ratesData={ratesData}/>}
                 {mode === AppMode.RateList && <RateList ratesData={ratesData}/>}
-            </div>
+            </main>
         </div>
     );
 }
