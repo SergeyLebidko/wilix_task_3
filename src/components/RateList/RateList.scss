@@ -5,26 +5,18 @@
   margin-right: auto;
   max-width: 1000px;
 
-  &__choice_block {
+  &__base_block {
+    padding: 0.5em;
     margin-bottom: 1em;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
 
-    label {
-      font-size: 1.2em;
-      margin: 1em 1em 1em 0;
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 6px;
     }
 
-    select {
-      font-size: 1.2em;
-      padding: 4px 8px;
-      border: 1px solid $gray;
-      border-radius: 5px;
-      background-color: $white;
-      width: 20em;
-      max-width: 80%;
+    p {
+      font-size: 0.9em;
+      color: $gray-dark;
     }
   }
 }

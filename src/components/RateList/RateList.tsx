@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import {RateRecord, RatesData} from '../../types';
 import {CURRENCY_CODE_MAP} from '../../settings';
 import './RateList.scss';
@@ -21,19 +21,20 @@ const RateList: React.FC<RateListProps> = ({ratesData, defaultBase, setDefaultBa
         return 1 / (rates[code] * (1 / rates[defaultBase]));
     };
 
-    const changeBaseHandler = (event: ChangeEvent<HTMLSelectElement>): void => setDefaultBase(event.target.value);
-
     return (
         <div className="rate_list">
-            <div className="rate_list__choice_block">
-                <label htmlFor="default_base_selector">Базовая валюта:</label>
-                <select id="default_base_selector" value={defaultBase} onChange={changeBaseHandler}>
-                    {rateCodes.map(
-                        (code: string) => <option key={code} value={code}>{code} {CURRENCY_CODE_MAP[code]}</option>
-                    )}
-                </select>
+            <div className="rate_list__base_block">
+                <h1>
+                    Базовая валюта: {defaultBase} {CURRENCY_CODE_MAP[defaultBase]}
+                </h1>
+                <p>
+                    Чтобы выбрать другую базовую валюту, просто кликните по её карточке внизу.
+                </p>
+                <p>
+                    Вы можете искать нужную валюту по её коду или названию.
+                </p>
             </div>
-            <RateCards rateCodes={rateCodes} getRateValue={getRateValue}/>
+            <RateCards rateCodes={rateCodes} getRateValue={getRateValue} clickHandler={setDefaultBase}/>
         </div>
     );
 }
