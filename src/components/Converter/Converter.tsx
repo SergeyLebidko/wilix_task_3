@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import RateCards from '../RateCards/RateCards';
 import {RateRecord, RatesData} from '../../types';
 import './Converter.scss';
@@ -12,12 +12,20 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
     const rateCodes: Array<string> = Object.keys(rates);
 
     const [error, setError] = useState<string | null>(null);
+    const errorTimer: { current: NodeJS.Timeout | undefined } = useRef();
+
     const [result, setResult] = useState<string | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
+    useEffect(() => {
+        return () => {
+            if (typeof errorTimer.current !== 'undefined') clearTimeout(errorTimer.current);
+        }
+    }, []);
+
     const setErrorText = (text: string): void => {
         setError(text);
-        setTimeout(() => setError(null), 4000);
+        errorTimer.current = setTimeout(() => setError(null), 4000);
     }
 
     // Обрабатываем нажатие пользователем кнопки Enter при вводе запроса
