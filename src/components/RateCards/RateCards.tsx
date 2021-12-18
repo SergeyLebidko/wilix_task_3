@@ -4,7 +4,7 @@ import './RateCards.scss';
 
 type RateCardsProps = {
     rateCodes: Array<string>,
-    getRateValue: (code: string) => number,
+    getRateValue?: (code: string) => number,
     clickHandler: (code: string) => void
 }
 
@@ -38,7 +38,7 @@ const RateCards: React.FC<RateCardsProps> = ({rateCodes, getRateValue, clickHand
                         <li key={code} className="rate_cards__card" onClick={() => clickHandler(code)}>
                             <span className="rate_cards__code">{code}</span>
                             <span className="rate_cards__name">{CURRENCY_CODE_MAP[code]}</span>
-                            <span className="rate_cards__rate">{getRateValue(code)}</span>
+                            {getRateValue && <span className="rate_cards__rate">{getRateValue(code)}</span>}
                         </li>
                 )}
             </ul>

@@ -1,8 +1,8 @@
 import React from 'react';
+import RateCards from '../RateCards/RateCards';
 import {RateRecord, RatesData} from '../../types';
 import {CURRENCY_CODE_MAP} from '../../settings';
 import './RateList.scss';
-import RateCards from "../RateCards/RateCards";
 
 type RateListProps = {
     ratesData: RatesData,
