@@ -1,7 +1,7 @@
-import {RATES_URL} from "./settings";
-import {RatesData} from "./types";
+import {RATES_URL} from './settings';
+import {RatesData} from './types';
 
-export async function loadRates(): Promise<RatesData>{
+export async function loadRates(): Promise<RatesData> {
     const response = await fetch(RATES_URL);
 
     const json = await response.json();

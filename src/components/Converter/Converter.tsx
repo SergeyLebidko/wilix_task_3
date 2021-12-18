@@ -15,26 +15,24 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
     const [result, setResult] = useState<string | null>();
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const setResultText = (startCount: number, resultCount: number, baseFrom: string, baseTo: string): void => {
-        setResult(`${startCount} ${baseFrom} = ${resultCount} ${baseTo}`);
-    }
-
     const setErrorText = (text: string): void => {
         setError(text);
         setTimeout(() => setError(null), 4000);
     }
 
-    const inputKeyPressHandler = (event: {key: string}): void => {
-        if(event.key === 'Enter') calcHandler();
+    // Обрабатываем нажатие пользователем кнопки Enter при вводе запроса
+    const inputKeyPressHandler = (event: { key: string }): void => {
+        if (event.key === 'Enter') calcHandler();
     }
 
     const calcHandler = (): void => {
         if (!inputRef.current) return;
 
         const {base, rates} = ratesData;
-        const [_count, _baseFrom, _baseTo] = inputRef.current.value.trim().split(/\s+/);
-        if (!_count || !_baseFrom || !_baseTo) {
-            setErrorText('Введите сумму, код исходной валюты и код целевой валюты');
+        const separatedValue = inputRef.current.value.trim().split(/\s+/);
+        const [_count, _baseFrom, _baseTo] = separatedValue;
+        if (!_count || !_baseFrom || !_baseTo || separatedValue.length > 3) {
+            setErrorText('Введите через пробел сумму, код исходной валюты и код целевой валюты');
             return;
         }
 
@@ -56,22 +54,26 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
             return;
         }
 
+        const setResultText = (resultCount: number): void => {
+            setResult(`${count} ${baseFrom} = ${resultCount} ${baseTo}`);
+        }
+
         if (baseFrom === baseTo) {
-            setResultText(count, count, baseFrom, baseTo);
+            setResultText(count);
             return;
         }
 
         if (baseTo === base) {
-            setResultText(count, count / rates[baseFrom], baseFrom, baseTo);
+            setResultText(count / rates[baseFrom]);
             return;
         }
 
         if (baseFrom === base) {
-            setResultText(count, count * rates[baseTo], baseFrom, baseTo);
+            setResultText(count * rates[baseTo]);
             return;
         }
 
-        setResultText(count, (count / rates[baseFrom]) * rates[baseTo], baseFrom, baseTo);
+        setResultText((count / rates[baseFrom]) * rates[baseTo]);
     }
 
     const cardClickHandler = (code: string): void => {
