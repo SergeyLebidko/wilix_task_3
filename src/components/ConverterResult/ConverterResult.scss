@@ -7,17 +7,17 @@
 
   &__text_value {
     font-size: 2em;
-    margin-right: 0.5rem;
+    margin: 4px 0.5rem 4px 0;
   }
 
   &__currency_block {
     display: flex;
     flex-direction: column;
-    margin-right: 0.5rem;
     background-color: $gray-light;
     border: 1px solid $gray;
     border-radius: 5px;
-    padding: 4px;
+    padding: 4px 6px;
+    margin: 4px 0.5rem 4px 0;
   }
 
   &__currency_code {
