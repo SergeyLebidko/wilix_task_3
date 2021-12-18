@@ -107,7 +107,7 @@ const Converter: React.FC<ConverterProps> = ({ratesData}) => {
             <p className="converter__help_text">
                 Вы можете выбирать нужные валюты из списка внизу (можно искать по коду или наименованию).
             </p>
-            <div className="converter__result_blok">
+            <div className="converter__result_bloсk">
                 {result !== null && <h1 className="converter__result">{result}</h1>}
             </div>
             <RateCards rateCodes={rateCodes} clickHandler={cardClickHandler}/>
